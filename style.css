@@ -5,6 +5,19 @@ body {
     background-attachment: fixed;
 }
 
+.gameBoardGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 30px);
+    grid-template-rows: repeat(3, 30px);
+}
+
+.block {
+    border: 1px solid black;
+}
+
+.block:hover {
+    background-color:blanchedalmond;
+}
 
 h5 {
     display:flex;

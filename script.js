@@ -1,6 +1,7 @@
 const gameBoard = ["X", "O", "X", "X", "X", "O", "O", "O", "X"];
 
 const player = (name) => {
+    
     const getName = () => name;
     
     const play = () => {
@@ -11,6 +12,7 @@ const player = (name) => {
 };
 
 const displayController = (() => {
+
     const add = (a, b) => a + b;
     
     return {add};
@@ -18,4 +20,11 @@ const displayController = (() => {
 
 const renderBoard = () => {
 
-}
+    let blocks = document.querySelectorAll(".block");
+    
+    blocks.forEach((element, index) => {
+        element.textContent = gameBoard[index];
+    });
+};
+
+renderBoard();

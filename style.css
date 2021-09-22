@@ -7,12 +7,16 @@ body {
 
 .gameBoardGrid {
     display: grid;
-    grid-template-columns: repeat(3, 30px);
-    grid-template-rows: repeat(3, 30px);
+    grid-template-columns: repeat(3, 90px);
+    grid-template-rows: repeat(3, 90px);
 }
 
 .block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border: 1px solid black;
+    font-size: 50px;
 }
 
 .block:hover {

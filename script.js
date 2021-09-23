@@ -38,7 +38,18 @@ const display = (() => {
             document.querySelector('.gameZone').style.display = 'flex';
         });
     }
+
+    const renderBoard = () => {
+
+        let blocks = document.querySelectorAll('.block');
+        
+        blocks.forEach((element, index) => {
     
+            element.textContent = gameBoard[index];
+            element.addEventListener('click', game.selectBlock);
+        });
+    };
+
     const turnIndicator = () => {
         
         document.querySelector('.display').textContent = `Is the turn of: ${game.getTurn()}`;
@@ -49,57 +60,46 @@ const display = (() => {
         document.querySelector('.display').textContent = `THE WINNER IS: ${winner}!!!`;
     }
 
-    return {prepare, turnIndicator, showWinner};
+    return {renderBoard, prepare, turnIndicator, showWinner};
 })();
-
-const renderBoard = () => {
-
-    let blocks = document.querySelectorAll('.block');
-    
-    blocks.forEach((element, index) => {
-
-        element.textContent = gameBoard[index];
-        element.addEventListener('click', selectBlock);
-    });
-};
-
-const selectBlock = (e) => {
-
-    let block = e.target;
-    
-    if (gameBoard[block.classList[1]] === '') {
-        if (game.getTurn() === player1.getName()) {
-            block.textContent = '❌';
-            game.setTurn(player2.getName());
-            gameBoard[block.classList[1]] = '❌';
-    
-        } else {
-            block.textContent = '🔵';
-            game.setTurn(player1.getName());
-            gameBoard[block.classList[1]] = '🔵';
-        }
-        display.turnIndicator();
-    }
-    
-    if (game.checkWinner('❌') === player1.getName()) {
-
-        display.showWinner(player1.getName());
-
-    } else if (game.checkWinner('🔵') === player2.getName()) {
-
-        display.showWinner(player2.getName());
-
-    } else if (!gameBoard.includes("")) {
-
-        document.querySelector('.display').textContent = 'TIE!!!';
-    }
-}
 
 const game = (() => {
 
     const getTurn = () => globalTurn;
 
     const setTurn = (turn) => globalTurn = turn;
+
+    const selectBlock = (e) => {
+
+        let block = e.target;
+        
+        if (gameBoard[block.classList[1]] === '') {
+            if (game.getTurn() === player1.getName()) {
+                block.textContent = '❌';
+                game.setTurn(player2.getName());
+                gameBoard[block.classList[1]] = '❌';
+        
+            } else {
+                block.textContent = '🔵';
+                game.setTurn(player1.getName());
+                gameBoard[block.classList[1]] = '🔵';
+            }
+            display.turnIndicator();
+        }
+        
+        if (game.checkWinner('❌') === player1.getName()) {
+    
+            display.showWinner(player1.getName());
+    
+        } else if (game.checkWinner('🔵') === player2.getName()) {
+    
+            display.showWinner(player2.getName());
+    
+        } else if (!gameBoard.includes("")) {
+    
+            document.querySelector('.display').textContent = 'TIE!!!';
+        }
+    }
 
     const checkWinner = (symbol) => {
 
@@ -181,16 +181,13 @@ const game = (() => {
             }
         }
     };
-    return {getTurn, setTurn, checkWinner};
+    return {getTurn, setTurn, selectBlock, checkWinner};
 })();
 
-display.prepare();
-
 const gameBoard = ['', '', '', '', '', '', '', '', ''];
-
 let globalTurn = null;
-
 let player1 = player();
 let player2 = player();
-            
-renderBoard();
+
+display.prepare();
+display.renderBoard();

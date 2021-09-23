@@ -2,43 +2,57 @@
 <html>
 <head>
     <title>Tic Tac Toe</title>
-    <meta charset="UTF-8"/>
-    <script src="script.js" defer></script>
-    <link rel="stylesheet" href="style.css">
+    <meta charset='UTF-8'/>
+    <script src='script.js' defer></script>
+    <link rel='stylesheet' href='style.css'>
 </head>
 
 <body>
  
     <main>
-    
-        <div class="display">
-            <div class="player1">
-                <div class="currentScore"></div>
-            </div>
-            <div class="player2">
-                <div class="currentScore"></div>
-            </div>
-        </div>
+        <div class='title'>TIC TAC TOE</div>
 
-        <div class="gameBoardContainer">
-            <div class="gameBoardGrid">
-                <div class="block 0"></div>
-                <div class="block 1"></div>
-                <div class="block 2"></div>
-                <div class="block 3"></div>
-                <div class="block 4"></div>
-                <div class="block 5"></div>
-                <div class="block 6"></div>
-                <div class="block 7"></div>
-                <div class="block 8"></div>
-            </div>
+        <div class='selectMenu'>SELECT:
+            <button class='vsPlayerButton'>Player vs Player</button>
+            <button class='vsCPUButton'>Player vs CPU</button>
         </div>
         
+        <div class='namesMenu'>
+            <label>Player 1:</label> <input type='text'>
+            <label>Player 2:</label> <input type='text'>
+            <button class='startButton'>START!</button>
+        </div>
+        
+        <div class='gameZone'>
+
+            <div class='display'>
+                <div class='player1'>
+                    <div class='currentScore'></div>
+                </div>
+                <div class='player2'>
+                    <div class='currentScore'></div>
+                </div>
+            </div>
+
+            <div class='gameBoardContainer'>
+                <div class='gameBoardGrid'>
+                    <div class='block 0'></div>
+                    <div class='block 1'></div>
+                    <div class='block 2'></div>
+                    <div class='block 3'></div>
+                    <div class='block 4'></div>
+                    <div class='block 5'></div>
+                    <div class='block 6'></div>
+                    <div class='block 7'></div>
+                    <div class='block 8'></div>
+                </div>
+            </div>
+        </div>
 
     </main>
 
     <footer>
-        <h5>Code by Fernetazo<a href="https://github.com/Fernetazo/Etch-a-Sketch"> <img src="GitHubIcon.png" alt="Git Hub icon"></a></h5>
+        <h5>Code by Fernetazo<a href='https://github.com/Fernetazo/Etch-a-Sketch'> <img src='GitHubIcon.png' alt='Git Hub icon'></a></h5>
     </footer>
 </body>
 </html>

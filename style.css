@@ -5,6 +5,14 @@ body {
     background-attachment: fixed;
 }
 
+.title {
+    font-size: 50px;
+}
+
+.gameZone {
+    visibility:hidden;
+}
+
 .gameBoardGrid {
     display: grid;
     grid-template-columns: repeat(3, 90px);

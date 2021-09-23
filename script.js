@@ -60,8 +60,8 @@ const game = (() => {
 
         let checker = 0;
         
-        for (let index = 0; index < 8;) {
-            for (let subIndex = 0; subIndex < 3; subIndex++) {
+        for (let index = 0; index <= 6;) {
+            for (let subIndex = 0; subIndex <= 2; subIndex++) {
                 let block = gameBoard[index + subIndex];
                 if (block === '❌') {
                     checker++;
@@ -77,10 +77,8 @@ const game = (() => {
             index = index + 3;
         }
         
-        checker = 0;
-
-        for (let index = 0; index < 3; index++) {
-            for (let subIndex = 0; subIndex < 8;) {
+        for (let index = 0; index <= 2; index++) {
+            for (let subIndex = 0; subIndex <= 6;) {
                 let block = gameBoard[index + subIndex];
                 if (block === '❌') {
                     checker++;
@@ -95,8 +93,37 @@ const game = (() => {
                 }
             }
         }
-    };
 
+        for (let index = 0; index <= 8;) {
+            let block = gameBoard[index];
+            if (block === '❌') {
+                checker++;
+                index = index + 4;
+                if (checker === 3) {
+                    display.textContent = `THE WINNER IS: ${player1.getName()}!!!`;
+                    return (player1.getName());
+                }
+            } else {
+                checker = 0;
+                break;
+            }
+        }
+
+        for (let index = 2; index <= 6;) {
+            let block = gameBoard[index];
+            if (block === '❌') {
+                checker++;
+                index = index + 2;
+                if (checker === 3) {
+                    display.textContent = `THE WINNER IS: ${player1.getName()}!!!`;
+                    return (player1.getName());
+                }
+            } else {
+                checker = 0;
+                break;
+            }
+        }
+    };
     return {getTurn, setTurn, checkWinner};
 })();
 

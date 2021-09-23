@@ -1,5 +1,27 @@
-const gameBoard = ['', '', '', '', '', '', '', '', ''];
-let globalTurn = null;
+const player = (name) => {
+
+    const getName = () => name;
+    
+    return {getName, selectBlock};
+};
+
+const displayController = (() => {
+
+    const add = (a, b) => a + b;
+    
+    return {add};
+})();
+
+const renderBoard = () => {
+
+    let blocks = document.querySelectorAll('.block');
+    
+    blocks.forEach((element, index) => {
+
+        element.textContent = gameBoard[index];
+        element.addEventListener('click', selectBlock);
+    });
+};
 
 const selectBlock = (e) => {
 
@@ -21,41 +43,18 @@ const selectBlock = (e) => {
     }
     
     if (game.checkWinner('❌') === player1.getName()) {
+
         display.textContent = `THE WINNER IS: ${player1.getName()}!!!`;
+
     } else if (game.checkWinner('🔵') === player2.getName()) {
+
         display.textContent = `THE WINNER IS: ${player2.getName()}!!!`;
+
     } else if (!gameBoard.includes("")) {
+
         display.textContent = 'TIE!!!';
     }
 }
-
-const player = (name) => {
-
-    const getName = () => name;
-    
-    return {getName, selectBlock};
-};
-
-const player1 = player('Fer');
-const player2 = player('Vero');
-
-const displayController = (() => {
-
-    const add = (a, b) => a + b;
-    
-    return {add};
-})();
-
-const renderBoard = () => {
-
-    let blocks = document.querySelectorAll('.block');
-    
-    blocks.forEach((element, index) => {
-
-        element.textContent = gameBoard[index];
-        element.addEventListener('click', selectBlock);
-    });
-};
 
 const game = (() => {
 
@@ -145,6 +144,13 @@ const game = (() => {
     };
     return {getTurn, setTurn, checkWinner};
 })();
+
+const gameBoard = ['', '', '', '', '', '', '', '', ''];
+
+let globalTurn = null;
+
+const player1 = player('Fer');
+const player2 = player('Vero');
 
 game.setTurn(player1.getName());
 

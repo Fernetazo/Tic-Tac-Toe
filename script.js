@@ -1,3 +1,8 @@
+/* TO DO: 
+            Turn indicator and show winner
+            Tie checker
+*/
+
 const player = (name) => {
 
     const getName = () => name;
@@ -5,11 +10,33 @@ const player = (name) => {
     return {getName, selectBlock};
 };
 
-const displayController = (() => {
+const display = (() => {
 
-    const add = (a, b) => a + b;
+    const prepare = () => {
+
+        document.querySelector('.vsButton').addEventListener('click', () => {
+            document.querySelector('.buttonsDiv').style.display = 'none';
+            document.querySelector('.namesMenu').style.display = 'flex';
+        });
+        
+        document.querySelector('.startButton').addEventListener('click', () => {
+            document.querySelector('.namesMenu').style.display = 'none';
+            document.querySelector('.selectMenu').style.display = 'none';
+            document.querySelector('.gameZone').style.display = 'flex';
+        });
+    }
     
-    return {add};
+    const turnIndicator = () => {
+        
+        document.querySelector('.display').textContent = `Is the turn of: ${game.getTurn()}`;
+    }
+
+    const showWinner = (winner) => {
+        
+        document.querySelector('.display').textContent = `THE WINNER IS: ${winner}!!!`;
+    }
+
+    return {prepare, turnIndicator, showWinner};
 })();
 
 const renderBoard = () => {
@@ -31,28 +58,27 @@ const selectBlock = (e) => {
         if (game.getTurn() === player1.getName()) {
             block.textContent = '❌';
             game.setTurn(player2.getName());
-            display.textContent = `Is the turn of: ${game.getTurn()}`;
             gameBoard[block.classList[1]] = '❌';
     
         } else {
             block.textContent = '🔵';
             game.setTurn(player1.getName());
-            display.textContent = `Is the turn of: ${game.getTurn()}`;
             gameBoard[block.classList[1]] = '🔵';
         }
+        display.turnIndicator();
     }
     
     if (game.checkWinner('❌') === player1.getName()) {
 
-        display.textContent = `THE WINNER IS: ${player1.getName()}!!!`;
+        display.showWinner(player1.getName());
 
     } else if (game.checkWinner('🔵') === player2.getName()) {
 
-        display.textContent = `THE WINNER IS: ${player2.getName()}!!!`;
+        display.showWinner(player2.getName());
 
     } else if (!gameBoard.includes("")) {
 
-        display.textContent = 'TIE!!!';
+        document.querySelector('.display').textContent = 'TIE!!!';
     }
 }
 
@@ -145,6 +171,8 @@ const game = (() => {
     return {getTurn, setTurn, checkWinner};
 })();
 
+display.prepare();
+
 const gameBoard = ['', '', '', '', '', '', '', '', ''];
 
 let globalTurn = null;
@@ -153,8 +181,5 @@ const player1 = player('Fer');
 const player2 = player('Vero');
 
 game.setTurn(player1.getName());
-
-let display = document.querySelector('.display');
-display.textContent = `Is the turn of: ${game.getTurn()}`;
 
 renderBoard();

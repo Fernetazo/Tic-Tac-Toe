@@ -19,7 +19,14 @@ const selectBlock = (e) => {
             gameBoard[block.classList[1]] = '🔵';
         }
     }
-    game.checkWinner();
+    
+    if (game.checkWinner('❌') === player1.getName()) {
+        display.textContent = `THE WINNER IS: ${player1.getName()}!!!`;
+    } else if (game.checkWinner('🔵') === player2.getName()) {
+        display.textContent = `THE WINNER IS: ${player2.getName()}!!!`;
+    } else if (!gameBoard.includes("")) {
+        display.textContent = 'TIE!!!';
+    }
 }
 
 const player = (name) => {
@@ -56,18 +63,21 @@ const game = (() => {
 
     const setTurn = (turn) => globalTurn = turn;
 
-    const checkWinner = () => {
+    const checkWinner = (symbol) => {
 
         let checker = 0;
         
         for (let index = 0; index <= 6;) {
             for (let subIndex = 0; subIndex <= 2; subIndex++) {
                 let block = gameBoard[index + subIndex];
-                if (block === '❌') {
+                if (block === symbol) {
                     checker++;
                     if (checker === 3) {
-                        display.textContent = `THE WINNER IS: ${player1.getName()}!!!`;
-                        return (player1.getName());
+                        if (symbol === "❌") {
+                            return (player1.getName());
+                        } else {
+                            return (player2.getName());
+                        }
                     }
                 } else {
                     checker = 0;
@@ -80,12 +90,15 @@ const game = (() => {
         for (let index = 0; index <= 2; index++) {
             for (let subIndex = 0; subIndex <= 6;) {
                 let block = gameBoard[index + subIndex];
-                if (block === '❌') {
+                if (block === symbol) {
                     checker++;
                     subIndex = subIndex + 3;
                     if (checker === 3) {
-                        display.textContent = `THE WINNER IS: ${player1.getName()}!!!`;
-                        return (player1.getName());
+                        if (symbol === "❌") {
+                            return (player1.getName());
+                        } else {
+                            return (player2.getName());
+                        }
                     }
                 } else {
                     checker = 0;
@@ -96,12 +109,15 @@ const game = (() => {
 
         for (let index = 0; index <= 8;) {
             let block = gameBoard[index];
-            if (block === '❌') {
+            if (block === symbol) {
                 checker++;
                 index = index + 4;
                 if (checker === 3) {
-                    display.textContent = `THE WINNER IS: ${player1.getName()}!!!`;
-                    return (player1.getName());
+                    if (symbol === "❌") {
+                        return (player1.getName());
+                    } else {
+                        return (player2.getName());
+                    }
                 }
             } else {
                 checker = 0;
@@ -111,12 +127,15 @@ const game = (() => {
 
         for (let index = 2; index <= 6;) {
             let block = gameBoard[index];
-            if (block === '❌') {
+            if (block === symbol) {
                 checker++;
                 index = index + 2;
                 if (checker === 3) {
-                    display.textContent = `THE WINNER IS: ${player1.getName()}!!!`;
-                    return (player1.getName());
+                    if (symbol === "❌") {
+                        return (player1.getName());
+                    } else {
+                        return (player2.getName());
+                    }
                 }
             } else {
                 checker = 0;

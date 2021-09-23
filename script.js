@@ -1,13 +1,19 @@
 /* TO DO: 
-            Turn indicator and show winner
-            Tie checker
+        Dont permit user input block after winning
+        Nice UI
 */
 
 const player = (name) => {
 
     const getName = () => name;
-    
-    return {getName, selectBlock};
+
+    const setName = () => {
+
+        player1 = player(document.querySelector('.P1name').value || 'Player 1')
+        player2 = player(document.querySelector('.P2name').value || 'Player 2')
+    };
+
+    return {getName, setName};
 };
 
 const display = (() => {
@@ -20,6 +26,13 @@ const display = (() => {
         });
         
         document.querySelector('.startButton').addEventListener('click', () => {
+
+            player1.setName();
+            player2.setName();
+
+            game.setTurn(player1.getName());
+            display.turnIndicator();
+
             document.querySelector('.namesMenu').style.display = 'none';
             document.querySelector('.selectMenu').style.display = 'none';
             document.querySelector('.gameZone').style.display = 'flex';
@@ -177,9 +190,7 @@ const gameBoard = ['', '', '', '', '', '', '', '', ''];
 
 let globalTurn = null;
 
-const player1 = player('Fer');
-const player2 = player('Vero');
-
-game.setTurn(player1.getName());
-
+let player1 = player();
+let player2 = player();
+            
 renderBoard();

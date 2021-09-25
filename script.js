@@ -1,6 +1,6 @@
 /* TO DO: 
-        Dont permit user input block after winning
         Nice UI
+        Reset button
 */
 
 const player = (name) => {
@@ -58,6 +58,14 @@ const display = (() => {
     const showWinner = (winner) => {
         
         document.querySelector('.display').textContent = `THE WINNER IS: ${winner}!!!`;
+        
+        let blocks = document.querySelectorAll('.block');
+        
+        blocks.forEach((element, index) => {
+    
+            element.textContent = gameBoard[index];
+            element.removeEventListener('click', game.selectBlock);
+        });
     }
 
     return {renderBoard, prepare, turnIndicator, showWinner};

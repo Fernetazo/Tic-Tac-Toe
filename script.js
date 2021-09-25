@@ -37,6 +37,8 @@ const display = (() => {
             document.querySelector('.selectMenu').style.display = 'none';
             document.querySelector('.gameZone').style.display = 'flex';
         });
+
+        document.querySelector('.resetButton').addEventListener('click', game.resetGame);
     }
 
     const renderBoard = () => {
@@ -76,6 +78,18 @@ const game = (() => {
     const getTurn = () => globalTurn;
 
     const setTurn = (turn) => globalTurn = turn;
+
+    const resetGame = () => {
+        gameBoard = ['', '', '', '', '', '', '', '', ''];
+        game.setTurn(player1.getName());
+        display.turnIndicator();
+        display.renderBoard();
+
+        let blocks = document.querySelectorAll('.block');
+        blocks.forEach((element) => {
+            element.textContent = null;
+        });
+    }
 
     const selectBlock = (e) => {
 
@@ -189,10 +203,10 @@ const game = (() => {
             }
         }
     };
-    return {getTurn, setTurn, selectBlock, checkWinner};
+    return {getTurn, setTurn, selectBlock, checkWinner, resetGame};
 })();
 
-const gameBoard = ['', '', '', '', '', '', '', '', ''];
+let gameBoard = ['', '', '', '', '', '', '', '', ''];
 let globalTurn = null;
 let player1 = player();
 let player2 = player();

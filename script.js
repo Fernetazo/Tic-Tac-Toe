@@ -1,6 +1,8 @@
 /* TO DO: 
+        Prevent AI from playing after match ends
+        AI random
+        AI unbeatable    
         Nice UI
-        Reset button
 */
 
 const player = (name) => {
@@ -91,10 +93,19 @@ const game = (() => {
         });
     }
 
+    const CPUplay = () => {
+        //if (difficult === 'easy') {
+            let CPUelection = gameBoard.indexOf('', Math.floor(Math.random() * 8));
+            
+            // Escape UNICODE starting number problem
+            // https://stackoverflow.com/questions/20306204/using-queryselector-with-ids-that-are-numbers
+            return (document.querySelector(`.\\3${CPUelection} `).click());
+        //}
+    }
+
     const selectBlock = (e) => {
 
         let block = e.target;
-        
         if (gameBoard[block.classList[1]] === '') {
             if (game.getTurn() === player1.getName()) {
                 block.textContent = '❌';
@@ -120,6 +131,10 @@ const game = (() => {
         } else if (!gameBoard.includes("")) {
     
             document.querySelector('.display').textContent = 'TIE!!!';
+        }
+        
+        if (game.getTurn() === player2.getName()) {
+            game.CPUplay();
         }
     }
 
@@ -203,7 +218,7 @@ const game = (() => {
             }
         }
     };
-    return {getTurn, setTurn, selectBlock, checkWinner, resetGame};
+    return {getTurn, setTurn, selectBlock, checkWinner, resetGame, CPUplay};
 })();
 
 let gameBoard = ['', '', '', '', '', '', '', '', ''];

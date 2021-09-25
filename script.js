@@ -132,7 +132,7 @@ const game = (() => {
             document.querySelector('.display').textContent = 'TIE!!!';
         } else {
             if (game.getTurn() === player2.getName()) {
-                game.CPUplay();
+                setTimeout(() => game.CPUplay(), 500);
             }
         }
     }

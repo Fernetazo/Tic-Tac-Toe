@@ -1,5 +1,4 @@
 /* TO DO: 
-        Prevent AI from playing after match ends
         AI random
         AI unbeatable    
         Nice UI
@@ -131,10 +130,10 @@ const game = (() => {
         } else if (!gameBoard.includes("")) {
     
             document.querySelector('.display').textContent = 'TIE!!!';
-        }
-        
-        if (game.getTurn() === player2.getName()) {
-            game.CPUplay();
+        } else {
+            if (game.getTurn() === player2.getName()) {
+                game.CPUplay();
+            }
         }
     }
 

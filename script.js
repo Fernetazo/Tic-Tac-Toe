@@ -1,5 +1,6 @@
 /* TO DO: 
-        AI random
+        Diferenciate between vs player and vs CPU
+        Prevent user from input while CPU is thinking        
         AI unbeatable    
         Nice UI
 */
@@ -21,9 +22,10 @@ const display = (() => {
 
     const prepare = () => {
 
-        document.querySelector('.vsButton').addEventListener('click', () => {
+        document.querySelector('.vsPlayerButton').addEventListener('click', () => {
             document.querySelector('.buttonsDiv').style.display = 'none';
             document.querySelector('.namesMenu').style.display = 'flex';
+            game.setMode = 'vsHuman';
         });
         
         document.querySelector('.startButton').addEventListener('click', () => {
@@ -37,6 +39,18 @@ const display = (() => {
             document.querySelector('.namesMenu').style.display = 'none';
             document.querySelector('.selectMenu').style.display = 'none';
             document.querySelector('.gameZone').style.display = 'flex';
+        });
+
+        document.querySelector('.vsCPUButton').addEventListener('click', () => {
+            document.querySelector('.buttonsDiv').style.display = 'none';
+            document.querySelector('.difficultMenu').style.display = 'flex';
+            game.setMode = 'vsCPU';
+        });
+
+        document.querySelector('.easyButton').addEventListener('click', () => {
+            document.querySelector('.difficultMenu').style.display = 'none';
+            document.querySelector('.namesMenu').style.display = 'flex';
+            player2.setName('CPU');
         });
 
         document.querySelector('.resetButton').addEventListener('click', game.resetGame);
@@ -92,6 +106,12 @@ const game = (() => {
         });
     }
 
+    const getMode = () => gameMode;
+
+    const setMode = (mode) => {
+        gameMode = mode;
+    }
+
     const CPUplay = () => {
         //if (difficult === 'easy') {
             let CPUelection = gameBoard.indexOf('', Math.floor(Math.random() * 8));
@@ -131,7 +151,9 @@ const game = (() => {
     
             document.querySelector('.display').textContent = 'TIE!!!';
         } else {
+            
             if (game.getTurn() === player2.getName()) {
+            
                 setTimeout(() => game.CPUplay(), 500);
             }
         }
@@ -217,11 +239,12 @@ const game = (() => {
             }
         }
     };
-    return {getTurn, setTurn, selectBlock, checkWinner, resetGame, CPUplay};
+    return {getTurn, setTurn, selectBlock, checkWinner, resetGame, CPUplay, getMode, setMode};
 })();
 
 let gameBoard = ['', '', '', '', '', '', '', '', ''];
 let globalTurn = null;
+let gameMode = null;
 let player1 = player();
 let player2 = player();
 

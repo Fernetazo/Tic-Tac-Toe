@@ -1,7 +1,7 @@
 body {
     margin: 0;
     padding: 20px;
-    height:max-content;
+    height: max-content;
     background-attachment: fixed;
 }
 
@@ -20,7 +20,7 @@ body {
     font-size: 50px;
 }
 
-.vsButton, .startButton{
+.optionButton, .startButton {
     height: 50px;
     width: 150px;
 }
@@ -31,6 +31,19 @@ body {
     justify-content: space-between;
     height: 300px;
     align-items: center;
+}
+
+.difficultMenu, .buttonsDiv {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 100px;
+    width: 500px;
+    align-items: center;
+}
+
+.difficultMenu {
+    display: none;
 }
 
 .gameZone {

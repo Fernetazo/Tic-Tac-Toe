@@ -1,6 +1,4 @@
 /* TO DO: 
-        Diferenciate between vs player and vs CPU
-        Prevent user from input while CPU is thinking        
         AI unbeatable    
         Nice UI
 */
@@ -108,6 +106,8 @@ const game = (() => {
         blocks.forEach((element) => {
             element.textContent = null;
         });
+
+        document.querySelector('.gameBoardContainer').style = 'pointer-events:auto';
     }
 
     const getMode = () => gameMode;
@@ -128,6 +128,10 @@ const game = (() => {
 
     const selectBlock = (e) => {
 
+        if (game.getMode() === 'vsCPU') {
+            document.querySelector('.gameBoardContainer').style = 'pointer-events:none;';
+        }
+        
         let block = e.target;
         if (gameBoard[block.classList[1]] === '') {
             if (game.getTurn() === player1.getName()) {
@@ -158,7 +162,10 @@ const game = (() => {
             
             if (game.getMode() === 'vsCPU' && game.getTurn() === player2.getName()) {
             
-                setTimeout(() => game.CPUplay(), 500);
+                setTimeout(() => {
+                    game.CPUplay();
+                    document.querySelector('.gameBoardContainer').style = 'pointer-events:auto';
+                }, 500);
             }
         }
     }

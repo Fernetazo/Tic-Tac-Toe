@@ -44,9 +44,9 @@ const display = (() => {
         });
 
         document.querySelector('.unbeatableButton').addEventListener('click', () => {
-            document.querySelector('.difficultyMenu').style.display = 'none';
-            document.querySelector('.namesMenu').style.display = 'flex';
-            game.setDifficulty('unbeatable');
+            //document.querySelector('.difficultyMenu').style.display = 'none';
+            //document.querySelector('.namesMenu').style.display = 'flex';
+            //game.setDifficulty('unbeatable');
         });
         
         document.querySelector('.startButton').addEventListener('click', () => {
@@ -138,14 +138,23 @@ const game = (() => {
             return (document.querySelector(`.\\3${CPUelection} `).click());
         }
         if (game.getDifficulty() === 'unbeatable') {
+            let CPUelection = game.unbeatableMove();
+            console.log(CPUelection);
+            return (document.querySelector(`.\\3${CPUelection} `).click());
         }
+    }
+
+    const unbeatableMove = () => {
+        // TO DO
+    }
+
+    const minimax = () => {
+        // TO DO
     }
 
     const selectBlock = (e) => {
 
-        if (game.getMode() === 'vsCPU') {
-            document.querySelector('.gameBoardContainer').style = 'pointer-events:none;';
-        }
+        
         
         let block = e.target;
         if (gameBoard[block.classList[1]] === '') {
@@ -153,6 +162,10 @@ const game = (() => {
                 block.textContent = '❌';
                 game.setTurn(player2.getName());
                 gameBoard[block.classList[1]] = '❌';
+
+                if (game.getMode() === 'vsCPU') {
+                    document.querySelector('.gameBoardContainer').style = 'pointer-events:none;';
+                }
         
             } else {
                 block.textContent = '🔵';
@@ -266,7 +279,7 @@ const game = (() => {
             }
         }
     };
-    return {getTurn, setTurn, selectBlock, checkWinner, resetGame, CPUplay, getDifficulty, setDifficulty, getMode, setMode};
+    return {getTurn, setTurn, selectBlock, checkWinner, resetGame, CPUplay, getDifficulty, setDifficulty, getMode, setMode, unbeatableMove, minimax};
 })();
 
 let gameBoard = ['', '', '', '', '', '', '', '', ''];

@@ -33,15 +33,22 @@ const display = (() => {
         
         document.querySelector('.vsCPUButton').addEventListener('click', () => {
             document.querySelector('.buttonsDiv').style.display = 'none';
-            document.querySelector('.difficultMenu').style.display = 'flex';
+            document.querySelector('.difficultyMenu').style.display = 'flex';
             game.setMode('vsCPU');
         });
 
         document.querySelector('.easyButton').addEventListener('click', () => {
-            document.querySelector('.difficultMenu').style.display = 'none';
+            document.querySelector('.difficultyMenu').style.display = 'none';
             document.querySelector('.namesMenu').style.display = 'flex';
+            game.setDifficulty('easy');
         });
 
+        document.querySelector('.unbeatableButton').addEventListener('click', () => {
+            document.querySelector('.difficultyMenu').style.display = 'none';
+            document.querySelector('.namesMenu').style.display = 'flex';
+            game.setDifficulty('unbeatable');
+        });
+        
         document.querySelector('.startButton').addEventListener('click', () => {
 
             player1.setName();
@@ -116,14 +123,22 @@ const game = (() => {
         gameMode = mode;
     }
 
+    const getDifficulty = () => difficulty;
+
+    const setDifficulty = (dif) => {
+        difficulty = dif;
+    }
+
     const CPUplay = () => {
-        //if (difficult === 'easy') {
+        if (game.getDifficulty() === 'easy') {
             let CPUelection = gameBoard.indexOf('', Math.floor(Math.random() * 8));
             
             // Escape UNICODE starting number problem
             // https://stackoverflow.com/questions/20306204/using-queryselector-with-ids-that-are-numbers
             return (document.querySelector(`.\\3${CPUelection} `).click());
-        //}
+        }
+        if (game.getDifficulty() === 'unbeatable') {
+        }
     }
 
     const selectBlock = (e) => {
@@ -150,6 +165,7 @@ const game = (() => {
         if (game.checkWinner('❌') === player1.getName()) {
     
             display.showWinner(player1.getName());
+            document.querySelector('.gameBoardContainer').style = 'pointer-events:auto';
     
         } else if (game.checkWinner('🔵') === player2.getName()) {
     
@@ -250,12 +266,13 @@ const game = (() => {
             }
         }
     };
-    return {getTurn, setTurn, selectBlock, checkWinner, resetGame, CPUplay, getMode, setMode};
+    return {getTurn, setTurn, selectBlock, checkWinner, resetGame, CPUplay, getDifficulty, setDifficulty, getMode, setMode};
 })();
 
 let gameBoard = ['', '', '', '', '', '', '', '', ''];
 let globalTurn = null;
 let gameMode = null;
+let difficulty = null;
 let player1 = player();
 let player2 = player();
 

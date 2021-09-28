@@ -12,7 +12,12 @@ const player = (name) => {
     const setName = () => {
 
         player1 = player(document.querySelector('.P1name').value || 'Player 1')
-        player2 = player(document.querySelector('.P2name').value || 'Player 2')
+
+        if (game.getMode() === 'vsCPU') {
+            player2 = player(document.querySelector('.P2name').value || 'CPU')
+        } else {
+            player2 = player(document.querySelector('.P2name').value || 'Player 2')
+        }
     };
 
     return {getName, setName};
@@ -25,32 +30,31 @@ const display = (() => {
         document.querySelector('.vsPlayerButton').addEventListener('click', () => {
             document.querySelector('.buttonsDiv').style.display = 'none';
             document.querySelector('.namesMenu').style.display = 'flex';
-            game.setMode = 'vsHuman';
+            game.setMode('vsHuman');
         });
         
+        document.querySelector('.vsCPUButton').addEventListener('click', () => {
+            document.querySelector('.buttonsDiv').style.display = 'none';
+            document.querySelector('.difficultMenu').style.display = 'flex';
+            game.setMode('vsCPU');
+        });
+
+        document.querySelector('.easyButton').addEventListener('click', () => {
+            document.querySelector('.difficultMenu').style.display = 'none';
+            document.querySelector('.namesMenu').style.display = 'flex';
+        });
+
         document.querySelector('.startButton').addEventListener('click', () => {
 
             player1.setName();
             player2.setName();
-
+            
             game.setTurn(player1.getName());
             display.turnIndicator();
 
             document.querySelector('.namesMenu').style.display = 'none';
             document.querySelector('.selectMenu').style.display = 'none';
             document.querySelector('.gameZone').style.display = 'flex';
-        });
-
-        document.querySelector('.vsCPUButton').addEventListener('click', () => {
-            document.querySelector('.buttonsDiv').style.display = 'none';
-            document.querySelector('.difficultMenu').style.display = 'flex';
-            game.setMode = 'vsCPU';
-        });
-
-        document.querySelector('.easyButton').addEventListener('click', () => {
-            document.querySelector('.difficultMenu').style.display = 'none';
-            document.querySelector('.namesMenu').style.display = 'flex';
-            player2.setName('CPU');
         });
 
         document.querySelector('.resetButton').addEventListener('click', game.resetGame);
@@ -152,7 +156,7 @@ const game = (() => {
             document.querySelector('.display').textContent = 'TIE!!!';
         } else {
             
-            if (game.getTurn() === player2.getName()) {
+            if (game.getMode() === 'vsCPU' && game.getTurn() === player2.getName()) {
             
                 setTimeout(() => game.CPUplay(), 500);
             }

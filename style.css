@@ -23,7 +23,6 @@
 
 body {
     margin: 0;
-    padding: 20px;
     height: max-content;
     background-attachment: fixed;
     background-color: black;
@@ -33,15 +32,15 @@ body {
 }
 
 .title {
-    font-size: 90px;
+    font-size: 100px;
     text-align: center;
-    height: 120px;;
-    color: white;
+    height: 120px;
+    margin-top: 20px;
 }
 
 .selectMenu {
     display: flex;
-    height: 400px;
+    height: 760px;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -50,15 +49,15 @@ body {
 }
 
 .optionButton, .startButton {
-    height: 50px;
-    width: 150px;
+    height: 80px;
+    width: 250px;
 }
 
 .namesMenu {
     display: none;
     flex-direction: column;
     justify-content: space-between;
-    height: 300px;
+    height: 460px;
     align-items: center;
 }
 
@@ -67,7 +66,7 @@ body {
     flex-direction: row;
     justify-content: space-between;
     height: 100px;
-    width: 500px;
+    width: 800px;
     align-items: center;
 }
 
@@ -77,27 +76,28 @@ body {
 
 .gameZone {
     display: none;
-    height: 400px;
+    height: 760px;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .display {
     margin-top: 20px;
+    font-size: 40px;
 }
 
 .gameBoardGrid {
     display: grid;
-    grid-template-columns: repeat(3, 90px);
-    grid-template-rows: repeat(3, 90px);
+    grid-template-columns: repeat(3, 190px);
+    grid-template-rows: repeat(3, 190px);
 }
 
 .block {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 50px;
+    font-size: 140px;
     transition: all 0.2s ;
     box-shadow:
         0 0 .5rem #fff,
@@ -116,21 +116,22 @@ body {
 .resetDiv {
     display: flex;
     justify-content: center;
-    height: 70px;
+    height: 95px;
 }
 
 .resetButton {
     height: 40px;
-    width: 90px;
+    width: 140px;
+    font-size: 20px;
     align-self: center;
 }
 
 button {
-    font-size: 1rem;
+    font-size: 2rem;
     color: #fff;
     border: 0.1rem solid #fff;
     border-radius: 2rem;
-    transition: all 0.4s ease;
+    transition: all 0.3s ;
 
     text-shadow:
         -0.2rem -0.2rem 1rem #fff,
@@ -185,6 +186,13 @@ button:active {
         0 0 1rem var(--neon-Ostyle-color);
 }
 
+footer {
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
 h5 {
     display:flex;
     flex-direction: row;
@@ -192,6 +200,7 @@ h5 {
     align-items: center;
     margin-top: 0px;
     margin-bottom: 0px;
+    font-size: 40px;
 }
 
 img {
@@ -199,6 +208,5 @@ img {
     height: auto;
 }
 a:link, a:hover, a:visited, a:active {
-    color: white;
     padding-left: 5px;
 }

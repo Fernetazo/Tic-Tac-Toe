@@ -159,30 +159,30 @@ const game = (() => {
         let block = e.target;
         if (gameBoard[block.classList[1]] === '') {
             if (game.getTurn() === player1.getName()) {
-                block.textContent = '❌';
+                block.textContent = 'X';
                 block.classList.add('Xstyle');
                 game.setTurn(player2.getName());
-                gameBoard[block.classList[1]] = '❌';
+                gameBoard[block.classList[1]] = 'X';
 
                 if (game.getMode() === 'vsCPU') {
                     document.querySelector('.gameBoardContainer').style = 'pointer-events:none;';
                 }
         
             } else {
-                block.textContent = '🔵';
+                block.textContent = 'O';
                 game.setTurn(player1.getName());
-                gameBoard[block.classList[1]] = '🔵';
+                gameBoard[block.classList[1]] = 'O';
                 block.classList.add('Ostyle');
             }
             display.turnIndicator();
         }
         
-        if (game.checkWinner('❌') === player1.getName()) {
+        if (game.checkWinner('X') === player1.getName()) {
     
             display.showWinner(player1.getName());
             document.querySelector('.gameBoardContainer').style = 'pointer-events:auto';
     
-        } else if (game.checkWinner('🔵') === player2.getName()) {
+        } else if (game.checkWinner('O') === player2.getName()) {
     
             display.showWinner(player2.getName());
     
@@ -211,7 +211,7 @@ const game = (() => {
                 if (block === symbol) {
                     checker++;
                     if (checker === 3) {
-                        if (symbol === "❌") {
+                        if (symbol === "X") {
                             return (player1.getName());
                         } else {
                             return (player2.getName());
@@ -232,7 +232,7 @@ const game = (() => {
                     checker++;
                     subIndex = subIndex + 3;
                     if (checker === 3) {
-                        if (symbol === "❌") {
+                        if (symbol === "X") {
                             return (player1.getName());
                         } else {
                             return (player2.getName());
@@ -251,7 +251,7 @@ const game = (() => {
                 checker++;
                 index = index + 4;
                 if (checker === 3) {
-                    if (symbol === "❌") {
+                    if (symbol === "X") {
                         return (player1.getName());
                     } else {
                         return (player2.getName());
@@ -269,7 +269,7 @@ const game = (() => {
                 checker++;
                 index = index + 2;
                 if (checker === 3) {
-                    if (symbol === "❌") {
+                    if (symbol === "X") {
                         return (player1.getName());
                     } else {
                         return (player2.getName());

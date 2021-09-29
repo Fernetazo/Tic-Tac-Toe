@@ -1,6 +1,7 @@
 /* TO DO: 
         AI unbeatable    
         Nice UI
+        Change neon style for X and O
 */
 
 const player = (name) => {
@@ -112,6 +113,7 @@ const game = (() => {
         let blocks = document.querySelectorAll('.block');
         blocks.forEach((element) => {
             element.textContent = null;
+            element.classList.remove('Xstyle') || element.classList.remove('Ostyle');
         });
 
         document.querySelector('.gameBoardContainer').style = 'pointer-events:auto';
@@ -154,12 +156,11 @@ const game = (() => {
 
     const selectBlock = (e) => {
 
-        
-        
         let block = e.target;
         if (gameBoard[block.classList[1]] === '') {
             if (game.getTurn() === player1.getName()) {
                 block.textContent = '❌';
+                block.classList.add('Xstyle');
                 game.setTurn(player2.getName());
                 gameBoard[block.classList[1]] = '❌';
 
@@ -171,6 +172,7 @@ const game = (() => {
                 block.textContent = '🔵';
                 game.setTurn(player1.getName());
                 gameBoard[block.classList[1]] = '🔵';
+                block.classList.add('Ostyle');
             }
             display.turnIndicator();
         }

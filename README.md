@@ -2,6 +2,7 @@
 
 Live Preview:
 
+https://fernetazo.github.io/Tic-Tac-Toe/
 
 
 Code by Fernetazo

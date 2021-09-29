@@ -140,7 +140,6 @@ const game = (() => {
             }, []);
 
             let CPUelection = CPUoptions[Math.floor(Math.random() * CPUoptions.length)];
-            console.log(CPUoptions);
             // Escape UNICODE starting number problem
             // https://stackoverflow.com/questions/20306204/using-queryselector-with-ids-that-are-numbers
             return (document.querySelector(`.\\3${CPUelection} `).click());

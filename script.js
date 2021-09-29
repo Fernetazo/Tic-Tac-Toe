@@ -1,7 +1,6 @@
 /* TO DO: 
-        AI unbeatable    
-        Nice UI
-        Change neon style for X and O
+    AI hard    
+    AI unbeatable    
 */
 
 const player = (name) => {

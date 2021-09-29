@@ -132,8 +132,15 @@ const game = (() => {
 
     const CPUplay = () => {
         if (game.getDifficulty() === 'easy') {
-            let CPUelection = gameBoard.indexOf('', Math.floor(Math.random() * 8));
-            
+
+            let CPUoptions = gameBoard.reduce((a, e, i) => {
+                if (e === '')
+                    a.push(i);
+                return a;
+            }, []);
+
+            let CPUelection = CPUoptions[Math.floor(Math.random() * CPUoptions.length)];
+            console.log(CPUoptions);
             // Escape UNICODE starting number problem
             // https://stackoverflow.com/questions/20306204/using-queryselector-with-ids-that-are-numbers
             return (document.querySelector(`.\\3${CPUelection} `).click());
@@ -188,6 +195,7 @@ const game = (() => {
         } else if (!gameBoard.includes("")) {
     
             document.querySelector('.display').textContent = 'TIE!!!';
+            document.querySelector('.gameBoardContainer').style = 'pointer-events:auto';
         } else {
             
             if (game.getMode() === 'vsCPU' && game.getTurn() === player2.getName()) {
